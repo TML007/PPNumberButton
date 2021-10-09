@@ -102,6 +102,7 @@
     _textField.textAlignment = NSTextAlignmentCenter;
     _textField.keyboardType = UIKeyboardTypeDecimalPad;
     _textField.font = [UIFont systemFontOfSize:_inputFieldFont];
+    _textField.textColor = [UIColor blackColor];
     if (self.decimalNum) {
         _textField.text = [NSString stringWithFormat:@"%.1f",_minValue];
     }else{
@@ -196,6 +197,13 @@
         
         [self buttonClickCallBackWithIncreaseStatus:YES];
     } else {
+        if (self.decimalNum) {
+            _textField.text = [NSString stringWithFormat:@"%.1f",_maxValue];
+        }else{
+            _textField.text = [NSString stringWithFormat:@"%.f",_maxValue];
+        }
+        
+        [self buttonClickCallBackWithIncreaseStatus:YES];
         if (_shakeAnimation) { [self shakeAnimationMethod]; } PPLog(@"已超过最大数量%.1f",_maxValue);
     }
 }
@@ -234,6 +242,13 @@
             
             return;
         }
+        if (self.decimalNum) {
+            _textField.text = [NSString stringWithFormat:@"%.1f",_minValue];
+        }else{
+            _textField.text = [NSString stringWithFormat:@"%.f",_minValue];
+        }
+        
+        [self buttonClickCallBackWithIncreaseStatus:NO];
         if (_shakeAnimation) { [self shakeAnimationMethod]; } PPLog(@"数量不能小于%.1f",_minValue);
     }
 }
